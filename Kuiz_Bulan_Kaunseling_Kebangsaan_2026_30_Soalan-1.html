@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kuiz Bulan Kaunseling Kebangsaan 2026</title>
+<style>
+body{font-family:Arial,sans-serif;background:#fff5f8;color:#172033;margin:0;padding:20px}
+.wrap{max-width:720px;margin:auto}.card{background:#fff;border:1px solid #eadbe1;border-radius:18px;padding:20px;margin-bottom:16px}
+h1{color:#b71945}.small{color:#667085}.opt{display:block;width:100%;text-align:left;padding:14px;margin:9px 0;border:1px solid #ddd;border-radius:12px;background:#fff;cursor:pointer;font-size:16px}.opt.selected{background:#fde8ef;border-color:#c81e4b}.btn{padding:12px 18px;border:0;border-radius:12px;background:#c81e4b;color:white;font-weight:bold;cursor:pointer}.btn.secondary{background:#e9edf2;color:#172033}.bar{height:9px;background:#eee;border-radius:20px}.fill{height:100%;background:#c81e4b;border-radius:20px;width:0}.result{font-size:18px}
+</style>
+</head>
+<body><div class="wrap">
+<div class="card"><h1>Kuiz Bulan Kaunseling Kebangsaan 2026</h1>
+<p><b>Kaunseling Era Digital: Memacu Kesejahteraan</b></p>
+<p class="small">30 soalan • Jawab semua soalan</p><div class="bar"><div id="fill" class="fill"></div></div><p id="progress" class="small"></p></div>
+<div id="quiz" class="card"></div>
+<button id="prev" class="btn secondary">Sebelumnya</button>
+<button id="next" class="btn">Seterusnya</button>
+<div id="result" class="card result" style="display:none"></div>
+</div>
+<script>
+const Q=[
+["Apakah tujuan utama perkhidmatan bimbingan dan kaunseling di sekolah?",["Membantu murid berkembang secara menyeluruh","Memberi hukuman kepada murid","Menggantikan tugas guru kelas","Menentukan keputusan peperiksaan murid"],0],
+["Apakah tindakan yang sesuai apabila murid berasa sedih dan menghadapi masalah?",["Memendam perasaan seorang diri","Mencari orang dewasa yang dipercayai untuk berkongsi","Menyebarkan masalah kepada semua rakan","Mengabaikan perasaan tersebut"],1],
+["Yang manakah merupakan contoh amalan kesejahteraan mental yang baik?",["Mendapatkan tidur yang mencukupi","Berkongsi masalah dengan individu yang dipercayai","Mengurus masa dengan baik","Menyimpan semua masalah tanpa meminta bantuan"],[0,1,2]],
+["Mendapatkan bantuan kaunseling apabila menghadapi cabaran merupakan salah satu cara mendapatkan sokongan yang sesuai.",["Betul","Salah"],0],
+["Dalam era digital, apakah contoh penggunaan teknologi yang sihat?",["Menggunakan teknologi untuk pembelajaran","Bermain permainan sepanjang hari","Menyebarkan maklumat peribadi rakan","Menggunakan media sosial ketika sedang belajar tanpa kawalan"],0],
+["Apakah maksud menjaga privasi dalam penggunaan media digital?",["Berkongsi semua maklumat diri","Melindungi maklumat peribadi daripada perkongsian yang tidak sesuai","Menggunakan akaun orang lain","Memberikan kata laluan kepada rakan"],1],
+["Apakah ciri komunikasi digital yang berhemah?",["Menggunakan bahasa yang sopan","Menghormati pandangan orang lain","Berfikir sebelum menghantar mesej","Menghina orang yang tidak sependapat"],[0,1,2]],
+["Jika menerima mesej dalam talian yang membuat kita berasa tidak selesa, apakah tindakan yang wajar?",["Balas dengan kata-kata kasar","Simpan bukti dan beritahu orang dewasa yang dipercayai","Sebarkan mesej tersebut kepada semua rakan","Berpura-pura tiada apa berlaku"],1],
+["Semua masalah perlu dipikul seorang diri dan tidak perlu dikongsikan dengan sesiapa.",["Betul","Salah"],1],
+["Apakah salah satu peranan GBK berkaitan perkembangan sahsiah murid?",["Membimbing murid membina sahsiah diri","Menentukan semua markah peperiksaan","Mengurus kantin sekolah","Menggantikan semua guru mata pelajaran"],0],
+["Apakah antara perkara yang boleh dibincangkan dalam sesi bimbingan dan kaunseling?",["Cabaran emosi","Perancangan pendidikan","Perancangan kerjaya","Cara menghukum rakan"],[0,1,2]],
+["Apakah maksud kesejahteraan emosi secara ringkas?",["Mampu mengenali dan mengurus emosi dengan baik","Tidak pernah berasa sedih","Sentiasa kelihatan gembira","Tidak berkongsi perasaan dengan sesiapa"],0],
+["Apakah tindakan yang sesuai sebelum berkongsi sesuatu berita di media sosial?",["Semak kesahihan maklumat","Terus kongsi kerana ramai orang berkongsi","Tambah cerita supaya lebih menarik","Kongsi tanpa membaca kandungan"],0],
+["Apakah amalan yang membantu membina hubungan positif dengan rakan?",["Mendengar apabila rakan bercakap","Menghormati perbezaan","Memberikan sokongan ketika rakan memerlukan","Menyebarkan rahsia rakan"],[0,1,2]],
+["Mengapakah seseorang perlu berhenti seketika apabila berasa terlalu tertekan sebelum membuat keputusan?",["Supaya dapat menenangkan diri dan berfikir dengan lebih jelas","Supaya masalah hilang secara automatik","Supaya tidak perlu meminta bantuan","Supaya boleh menyalahkan orang lain"],0],
+["Menggunakan teknologi secara seimbang bermaksud seseorang masih memberi perhatian kepada tidur, pembelajaran, aktiviti fizikal dan hubungan sosial.",["Betul","Salah"],0],
+["Apakah sikap yang sesuai apabila rakan berkongsi masalah peribadi dengan kita?",["Mendengar dengan empati dan menggalakkan rakan mendapatkan bantuan yang sesuai","Mentertawakan masalah rakan","Terus menceritakan masalah itu kepada orang lain","Memaksa rakan menceritakan semua perkara"],0],
+["Yang manakah menunjukkan seseorang menggunakan media digital secara bertanggungjawab?",["Menjaga kata laluan","Menghormati privasi orang lain","Menyemak maklumat sebelum berkongsi","Menggunakan akaun orang lain tanpa kebenaran"],[0,1,2]],
+["Apakah mesej utama tema “Kaunseling Era Digital: Memacu Kesejahteraan”?",["Teknologi dan kaunseling boleh digunakan secara positif untuk menyokong kesejahteraan","Semua masalah boleh diselesaikan melalui teknologi","Murid tidak memerlukan bantuan manusia","Media sosial lebih penting daripada kesejahteraan"],0],
+["Apakah tindakan paling sesuai jika kita merasakan masalah yang dihadapi sudah sukar untuk ditangani sendiri?",["Mendapatkan bantuan daripada individu yang dipercayai atau GBK","Menyembunyikan masalah selama mungkin","Menyalahkan diri sendiri","Mengasingkan diri daripada semua orang"],0],
+["Apakah maksud empati ketika berkomunikasi dengan rakan?",["Cuba memahami perasaan dan keadaan rakan","Memaksa rakan bersetuju dengan kita","Memberi komen tanpa mendengar","Mengabaikan perasaan rakan"],0],
+["Apakah tindakan yang sesuai apabila kita tersilap menghantar mesej kepada orang lain?",["Mengakui kesilapan dan membetulkannya dengan sopan","Menyalahkan penerima","Menghantar lebih banyak mesej yang kasar","Berpura-pura tidak berlaku apa-apa"],0],
+["Yang manakah merupakan contoh kemahiran mengurus emosi?",["Menarik nafas dan mengambil masa untuk bertenang","Terus menjerit apabila marah","Menyalahkan orang lain","Memendam kemarahan tanpa menguruskannya"],0],
+["Apakah yang perlu dilakukan jika melihat rakan menjadi mangsa buli dalam talian?",["Beritahu orang dewasa yang dipercayai dan jangan menyebarkan kandungan tersebut","Kongsi kandungan supaya ramai tahu","Balas dengan buli yang sama","Ketawakan rakan tersebut"],0],
+["Apakah manfaat menetapkan had masa penggunaan gajet?",["Membantu mengimbangi masa digital dengan aktiviti lain","Memastikan gajet digunakan sepanjang hari","Mengelakkan semua bentuk komunikasi","Menghapuskan keperluan untuk tidur"],0],
+["Yang manakah contoh sokongan sosial yang positif?",["Mendengar dan memberikan galakan yang sesuai","Mengejek apabila rakan gagal","Menyebarkan cerita peribadi rakan","Memaksa rakan menyelesaikan masalah sendiri"],0],
+["Apakah yang patut dilakukan sebelum membuat komen tentang seseorang di media sosial?",["Fikirkan kesan komen dan gunakan bahasa yang berhemah","Tulis apa sahaja yang terlintas","Pastikan komen itu menyakitkan hati","Sebarkan komen kepada orang lain dahulu"],0],
+["Apakah peranan teknologi yang sesuai dalam perkhidmatan kaunseling?",["Menjadi salah satu medium sokongan dan komunikasi yang digunakan secara bertanggungjawab","Menggantikan semua hubungan manusia","Menyebarkan maklumat peribadi murid","Membuat keputusan bagi semua murid"],0],
+["Apakah sikap yang menunjukkan kita menghargai diri sendiri?",["Menjaga emosi, kesihatan, masa dan keselamatan diri","Mengabaikan keperluan diri","Membandingkan diri dengan semua orang","Menganggap diri tidak layak dibantu"],0],
+["Apakah mesej yang paling sesuai untuk murid yang sedang menghadapi cabaran?",["Tidak perlu hadapi semuanya seorang diri; dapatkan bantuan apabila diperlukan","Simpan semua masalah sendiri","Jangan bercakap dengan sesiapa","Masalah pasti selesai jika diabaikan"],0]
+];
+let i=0,ans=Array(Q.length).fill(null);
+const quiz=document.getElementById("quiz"),prev=document.getElementById("prev"),next=document.getElementById("next");
+function render(){let q=Q[i],multi=Array.isArray(q[2]);quiz.innerHTML="<p class='small'>"+(multi?"Pilih semua jawapan yang betul.":"Pilih satu jawapan.")+"</p><h2>"+(i+1)+". "+q[0]+"</h2>";
+q[1].forEach((x,k)=>{let b=document.createElement("button");b.className="opt";b.textContent=x;if(multi?(ans[i]||[]).includes(k):ans[i]===k)b.classList.add("selected");b.onclick=()=>{if(multi){let a=ans[i]||[];ans[i]=a.includes(k)?a.filter(v=>v!==k):[...a,k]}else ans[i]=k;render()};quiz.appendChild(b)});
+document.getElementById("progress").textContent="Soalan "+(i+1)+" daripada 30";document.getElementById("fill").style.width=((i+1)/30*100)+"%";prev.disabled=i===0;next.textContent=i===29?"Hantar Kuiz":"Seterusnya"}
+prev.onclick=()=>{if(i>0){i--;render()}};next.onclick=()=>{if(ans[i]===null||(Array.isArray(ans[i])&&!ans[i].length)){alert("Sila pilih jawapan.");return}if(i<29){i++;render()}else finish()};
+function finish(){let s=0;Q.forEach((q,n)=>{let key=q[2];if(Array.isArray(key)){if(JSON.stringify((ans[n]||[]).slice().sort())===JSON.stringify(key.slice().sort()))s++}else if(ans[n]===key)s++});quiz.style.display="none";prev.style.display="none";next.style.display="none";let r=document.getElementById("result");r.style.display="block";r.innerHTML="<h2>Kuiz Selesai!</h2><p>Markah anda: <b>"+s+" / 30</b></p><p>Teruskan menjaga kesejahteraan diri, adab digital dan jangan takut mendapatkan bantuan apabila diperlukan.</p><button class='btn' onclick='location.reload()'>Cuba Semula</button>"}
+render();
+</script></body></html>
